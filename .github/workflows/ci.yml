@@ -1,38 +1,31 @@
-# .github/workflows/ci.yml
-name: TypeScript CI
+# .github/workflows/deploy.yml
+name: Deploy to EC2
 
-# Trigger the workflow on push or pull request to the main branch
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
-# Define the jobs to run in the workflow
 jobs:
-  build:
-
-    # The environment the job will run in
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository code
+      # Checkout the repository code with the updated action version
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Set up Node.js environment
+      # Set up Node.js environment with the updated action version
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '20' 
+          node-version: '20'  # Specify Node.js 20, or use 'lts' for long-term support version
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Lint the code
+      # Run linter
       - name: Run linter
         run: npm run lint
 
@@ -43,3 +36,4 @@ jobs:
       # Build the project
       - name: Build the project
         run: npm run build
+
