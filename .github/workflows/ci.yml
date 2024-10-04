@@ -1,0 +1,45 @@
+# .github/workflows/ci.yml
+name: TypeScript CI
+
+# Trigger the workflow on push or pull request to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Define the jobs to run in the workflow
+jobs:
+  build:
+
+    # The environment the job will run in
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # You can change this to any supported Node version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Lint the code
+      - name: Run linter
+        run: npm run lint
+
+      # Run tests
+      - name: Run tests
+        run: npm run test
+
+      # Build the project
+      - name: Build the project
+        run: npm run build
