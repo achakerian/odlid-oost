@@ -1,11 +1,12 @@
-// src/index.ts
+import cors from 'cors';
+
 
 import express, { Request, Response } from 'express';
 
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse JSON
+app.use(cors());
 app.use(express.json());
 
 // Basic route
@@ -23,7 +24,8 @@ app.get('/api/items', (req: Request, res: Response) => {
   res.json(items);
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// Bind to localhost (127.0.0.1) for local access only
+app.listen(PORT, '127.0.0.1', () => {
+  console.log(`Server running locally on http://127.0.0.1:${PORT}`);
 });
+
