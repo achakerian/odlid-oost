@@ -1,0 +1,13 @@
+{
+  "name": "my-ts-app",
+  "version": "1.0.0",
+  "description": "My TypeScript Application",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  }
+}
