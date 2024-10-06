@@ -28,16 +28,10 @@ async function constructPrompt(input: PromptSchemaType) {
   }
 }
 
-async function validateAPIKey() {
-  if(availableModels.length>0)
-    return true;
-  else
-    return false;
-}
-
 async function availableModels() {
   try {
-    await openai.models.list();
+    const ret =  await openai.models.list();
+    return ret.data;
   } catch (error: unknown) {
     return [];
   }
@@ -45,7 +39,6 @@ async function availableModels() {
 
 const AIutils = {
   availableModels,
-  validateAPIKey,
   constructPrompt
 }
 export default AIutils;

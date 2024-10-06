@@ -19,6 +19,9 @@ dotenv_1.default.config();
 const openai = new openai_1.OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
+// ^^^ setup requirements 
+// functions that take in Zod schemas and return Zod schemas
+// zod schemas can be found in zodSchemas.ts
 function constructPrompt(input) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -38,21 +41,11 @@ function constructPrompt(input) {
         }
     });
 }
-function validateAPIKey() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield openai.models.list();
-            return true;
-        }
-        catch (error) {
-            return false;
-        }
-    });
-}
 function availableModels() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield openai.models.list();
+            const ret = yield openai.models.list();
+            return ret;
         }
         catch (error) {
             return [];
@@ -61,7 +54,6 @@ function availableModels() {
 }
 const AIutils = {
     availableModels,
-    validateAPIKey,
     constructPrompt
 };
 exports.default = AIutils;
